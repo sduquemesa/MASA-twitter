@@ -1,6 +1,21 @@
 from flask import render_template
 import connexion
 
+from twitter_streaming.stream_collection import stream_twitter
+
+import threading
+import sys
+
+class Thread (threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        stream_twitter()
+
+t = Thread()
+t.start()
+
 # Create the application instance
 app = connexion.App(__name__, specification_dir='./')
 
@@ -15,6 +30,7 @@ def home():
     localhost:5000/
     :return:        the rendered template 'home.html'
     """
+
     return render_template('home.html')
 
 # If we're running in stand alone mode, run the application

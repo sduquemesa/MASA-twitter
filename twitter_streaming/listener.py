@@ -12,7 +12,7 @@ import time
 import sys
 import pandas as pd
 from sqlalchemy import create_engine
-from utils import parse_tweet
+from twitter_streaming.utils import parse_tweet
 
 class Listener(StreamListener):
     """ 
@@ -23,8 +23,8 @@ class Listener(StreamListener):
         self.reconnection_attemps = 0
         self.collected_tweets = 0
 
-        # create a engine to the database
-        # self.engine = create_engine('sqlite:///app/tweets.sqlite')
+        # create an engine to the database
+        self.engine = create_engine('sqlite:///app/tweets.sqlite')
         # switch to the following definition if run this code locally
         self.engine = create_engine('sqlite:///tweets.sqlite')
 
@@ -58,7 +58,8 @@ class Listener(StreamListener):
         # push tweet into database
         df.to_sql('tweets', con=self.engine, if_exists='replace')
 
-        # print(json.dumps(tweet_data, indent=4, sort_keys=True))
+        print(json.dumps(tweet_data, indent=4, sort_keys=True))
+
 
         return True
 

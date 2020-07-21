@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 import sqlite3
 
-DB_FILE = Path("../twitter_streaming/") / 'tweets.sqlite'
+DB_FILE = Path("./") / 'tweets.sqlite'
 
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))

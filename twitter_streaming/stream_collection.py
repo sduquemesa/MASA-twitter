@@ -11,7 +11,7 @@ Run settings.py before using this script.
 
 from tweepy import OAuthHandler, Stream, API
 
-from listener import Listener
+from twitter_streaming.listener import Listener
 
 from urllib3.exceptions import ProtocolError
 
@@ -37,7 +37,7 @@ ACCESS_TOKEN_SECRET = api_keys["ACCESS_TOKEN_SECRET"]
 # Search filter rule set to geo baunding box
 TRACK_LIST = ['#líderessocialesasesinados','líderes sociales','lideres sociales','lideres asesinados','líderes sociales asesinados']
 
-if __name__ == '__main__':
+def stream_twitter():
 
     # Authentication
     auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -78,3 +78,7 @@ if __name__ == '__main__':
         # due to unstable network connection
         except(ProtocolError, AttributeError):
             continue
+
+if __name__ == '__main__':
+
+    stream_twitter()
