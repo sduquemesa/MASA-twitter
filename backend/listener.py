@@ -39,9 +39,11 @@ class Listener(StreamListener):
         self.collected_tweets += 1
 
         tweet = status._json
+        tweet_data = parse_tweet(tweet)
 
-        tweet_df = parse_tweet(tweet)
-
+        tweet_embed_data = self.api.get_oembed(tweet_data['id'])
+        tweet_html = tweet_embed_data['html'].strip()
+        
         return True
 
     def on_error(self, status):

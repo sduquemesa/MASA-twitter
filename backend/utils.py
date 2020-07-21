@@ -23,13 +23,19 @@ def parse_tweet(tweet: dict) ->  dict:
 
     # Tweet's geo data
     if 'coordinates' in tweet:
-        tweet_coords = tweet['coordinates']['coordinates']      # Tweet coordinates in [long,lat]
+        tweet_coords = tweet['coordinates']      # Tweet coordinates in [long,lat]
     elif 'place' in tweet:
         tweet_bounding_box = tweet['place']['bounding_box']['coordinates']      # Tweet's location bounding box
         tweet_coords = bbox_centroid(tweet_bounding_box)                  # Tweet's centroid
     else:
         tweet_coords = None
 
+    tweet_data = {
+        'id': tweet_id_str,
+        'coords': tweet_coords
+    }
+
+    return tweet_data
 
 def bbox_centroid(bounding_box: list) -> list:
     '''Calculates the centroid of a bounding box'''
