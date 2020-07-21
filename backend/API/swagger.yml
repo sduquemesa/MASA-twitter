@@ -28,6 +28,8 @@ paths:
               properties:
                 created_at:
                   type: string
+                fetched_at:
+                  type: string
                 coords:
                   type: string
                 html_code:
