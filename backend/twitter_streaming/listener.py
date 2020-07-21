@@ -55,7 +55,7 @@ class Listener(StreamListener):
         # push tweet into database
         df.to_sql('tweets', con=self.engine, if_exists='replace')
 
-        print(json.dumps(dictionary, indent=4, sort_keys=True))
+        # print(json.dumps(tweet_data, indent=4, sort_keys=True))
 
         return True
 
