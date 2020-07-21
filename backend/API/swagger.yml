@@ -1,0 +1,34 @@
+swagger: "2.0"
+info:
+  description: Swagger file for the twitter API
+  version: "1.0.0"
+  title: MASA-twitter API
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+# Paths supported by the server application
+paths:
+  /lasttweet:
+    get:
+      operationId: lasttweet.read
+      tags:
+        - Tweet
+      summary: The tweet data structure obtained from the last tweet fetch from twitter
+      description: Read the data fetched from the last tweet
+      responses:
+        200:
+          description: Successful operation of reading last tweet data
+          schema:
+            type: array
+            items:
+              properties:
+                created_at:
+                  type: string
+                coords:
+                  type: string
+                html_code:
+                  type: string
