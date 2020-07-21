@@ -41,8 +41,11 @@ class Listener(StreamListener):
         tweet = status._json
         tweet_data = parse_tweet(tweet)
 
-        tweet_embed_data = self.api.get_oembed(tweet_data['id'])
-        tweet_html = tweet_embed_data['html'].strip()
+        try:
+            tweet_embed_data = self.api.get_oembed(tweet_data['id'])
+            tweet_html = tweet_embed_data['html'].strip()
+        except:
+            return True
 
         # append html data to dict
         tweet_data['html'] = tweet_html
