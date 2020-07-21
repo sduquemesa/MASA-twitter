@@ -43,7 +43,20 @@ class Listener(StreamListener):
 
         tweet_embed_data = self.api.get_oembed(tweet_data['id'])
         tweet_html = tweet_embed_data['html'].strip()
-        
+
+        # append html data to dict
+        tweet_data['html'] = tweet_html
+
+        # convert into dataframe
+        df = pd.DataFrame(tweet_data, index=[0])
+        # convert string of time into date time obejct
+        df['created_at'] = pd.to_datetime(df.created_at)
+
+        # push tweet into database
+        df.to_sql('tweets', con=self.engine, if_exists='replace')
+
+        print(json.dumps(dictionary, indent=4, sort_keys=True))
+
         return True
 
     def on_error(self, status):

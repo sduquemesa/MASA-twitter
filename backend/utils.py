@@ -31,6 +31,7 @@ def parse_tweet(tweet: dict) ->  dict:
         tweet_coords = None
 
     tweet_data = {
+        'created_at': tweet_created_at,
         'id': tweet_id_str,
         'coords': tweet_coords
     }
